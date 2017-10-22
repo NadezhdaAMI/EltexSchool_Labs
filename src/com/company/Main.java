@@ -27,7 +27,7 @@ import java.util.UUID;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
         Scanner n = new Scanner(System.in);
 
         System.out.println("Vvedite vid predstavleniya: ");
@@ -37,9 +37,9 @@ public class Main {
         if (type == 1){
             while (N != 0)
             {
-                Telephone tel = new Telephone();
-                tel.create();
-                tel.read();
+                Telephone telephone = new Telephone();
+                telephone.create();
+                telephone.read();
                 N--;
 //                tel.update();
 //                tel.read();
@@ -49,13 +49,23 @@ public class Main {
                 //tel.getCountElectronics();
             }
 
-
         } else
         if (type == 2) {
-            Smartphone smart = new Smartphone();
+            while (N != 0) {
+                Smartphone smartphone = new Smartphone();
+                smartphone.create();
+                smartphone.read();
+                N--;
+            }
         } else
         if (type == 3) {
-            Tablet tablet = new Tablet();
+            while (N != 0) {
+                Tablet tablet = new Tablet();
+                tablet.create();
+                tablet.read();
+                N--;
+            }
+
         } else
             System.out.println("Not exist!");
 
@@ -156,7 +166,8 @@ class Telephone extends Electronics implements ICrudAction{  //1 type
 class Smartphone extends Electronics implements ICrudAction {   //2 type
     enum SimcardCase {usual, micro_Sim};
     SimcardCase TypeofSimcard;
-    int countSimcard;
+    int NumberOfSimCard;
+
     public String mDevice;
 
     @Override
@@ -166,6 +177,11 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
         IDelectronics = UUID.randomUUID();
 
         TypeofSimcard = SimcardCase.values()[random.nextInt(SimcardCase.values().length)];
+
+        int[] numerSimCa = {1, 2};
+        int index_number = random.nextInt(numerSimCa.length);
+        NumberOfSimCard = numerSimCa[index_number];
+
 
         String[] nameArr = {"Apple", "Samsung", "Nokia", "ASUS"};
         int index_Name = random.nextInt(nameArr.length);
@@ -192,7 +208,7 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
 
     @Override
     public void read() {
-        mDevice = IDelectronics + ", " + TypeofSimcard.toString() + ", "+ Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
+        mDevice = IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "+ Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
         System.out.println(mDevice);
 
     }
@@ -201,6 +217,7 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
     public void update() {
         System.out.println("Dobavim object:");
         Scanner n = new Scanner(System.in);
+        NumberOfSimCard = n.nextInt();
         Name = n.next();
         Price = n.nextInt();
         NameCompany = n.next();
@@ -212,6 +229,8 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
 
     @Override
     public void delete() {
+        IDelectronics = null;
+        NumberOfSimCard = 0;
         Name = null;
         Price = 0;
         NameCompany = null;
@@ -222,29 +241,77 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
 }
 
 class Tablet extends Electronics implements ICrudAction{ //3 type
-    String videoproc;
-    int Screenresol;
+    public String mDevice;
+    enum VideoProc {Nvidia_Tegra, Intel_Atom, RockChip};
+    VideoProc TypeofVideoProc;
+
+    String[] ScreenresolArr = {"7dm", "12dm", "16dm"};
+    String TypeofScreenresol;
 
     @Override
-    public void create() {
+    public void create()  {
+        Random random = new Random();
+
+        IDelectronics = UUID.randomUUID();
+
+        TypeofVideoProc = VideoProc.values()[random.nextInt(VideoProc.values().length)];
+
+        TypeofScreenresol = ScreenresolArr[random.nextInt(ScreenresolArr.length)];
+
+        String[] nameArr = {"Apple", "Samsung", "ASUS"};
+        int index_Name = random.nextInt(nameArr.length);
+        Name = nameArr[index_Name];
+
+        int[] priceArr = {2400, 2450, 2500, 1700};
+        int index_Price = random.nextInt(priceArr.length);
+        Price = priceArr[index_Price];
+
+        String[] nameCoArr = {"Apple Co.", "Samsung Co.", "ASUS Co."};
+        int index_NameCo = random.nextInt(nameCoArr.length);
+        NameCompany = nameCoArr[index_NameCo];
+
+        String[] modelArr = {"t1", "t2", "t5"};
+        int index_model = random.nextInt(modelArr.length);
+        Model = modelArr[index_model];
+
+        String[] NameOperSystemArr = {"1.2", "2.5", "2.8", "7.1"};
+        int index_NameOperSystem = random.nextInt(NameOperSystemArr.length);
+        NameOperSystem = NameOperSystemArr[index_NameOperSystem];
+
+        CountElectronics++;
     }
 
     @Override
     public void read() {
+        mDevice = IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
+        System.out.println(mDevice);
 
     }
 
     @Override
     public void update() {
+        System.out.println("Dobavim object:");
+        Scanner n = new Scanner(System.in);
+        TypeofScreenresol = n.next();
+        Name = n.next();
+        Price = n.nextInt();
+        NameCompany = n.next();
+        Model = n.next();
+        NameOperSystem = n.next();
+        CountElectronics++;
 
     }
 
     @Override
     public void delete() {
-
+        IDelectronics = null;
+        TypeofScreenresol = null;
+        Name = null;
+        Price = 0;
+        NameCompany = null;
+        Model = null;
+        NameOperSystem = null;
+        TypeofVideoProc = null;
+        CountElectronics--;
     }
-}
-
-class GenerateID {
-    UUID id1 = UUID.randomUUID();
 }
