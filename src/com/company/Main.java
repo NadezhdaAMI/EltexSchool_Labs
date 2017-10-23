@@ -30,7 +30,10 @@ public class Main {
 
         Scanner n = new Scanner(System.in);
 
-        System.out.println("Vvedite vid predstavleniya: ");
+        System.out.println("Vvedite vid predstavleniya(Vvedite chislo): ");
+        System.out.println("Telephone - 1");
+        System.out.println("Smartphone - 2");
+        System.out.println("Tablet - 3 ");
         int type = n.nextInt();
         System.out.println("Vvedite kol-vo objectov: ");
         int N = n.nextInt();
