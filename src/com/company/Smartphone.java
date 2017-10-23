@@ -11,6 +11,10 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
 
     public String mDevice;
 
+    public Smartphone(UUID IDelectronics) {
+        super(IDelectronics);
+    }
+
     @Override
     public void create() {
         Random random = new Random();

@@ -13,6 +13,10 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
     String[] ScreenresolArr = {"7dm", "12dm", "16dm"};
     String TypeofScreenresol;
 
+    public Tablet(UUID IDelectronics) {
+        super(IDelectronics);
+    }
+
     @Override
     public void create()  {
         Random random = new Random();

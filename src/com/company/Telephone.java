@@ -10,14 +10,13 @@ class Telephone extends Electronics implements ICrudAction {  //1 type
     PhoneCase typePhoneCase;
     public String mDevice;
 
-
+    public Telephone(UUID ID) {
+        super(ID);
+    }
 
     @Override
     public void create() {
         Random random = new Random();
-
-        IDelectronics = UUID.randomUUID();
-
         typePhoneCase = PhoneCase.values()[random.nextInt(PhoneCase.values().length)];
 
         String[] nameArr = {"Apple", "Samsung", "Nokia", "ASUS"};
@@ -46,8 +45,7 @@ class Telephone extends Electronics implements ICrudAction {  //1 type
     @Override
     public void read() {
 
-        mDevice = IDelectronics + ", " + typePhoneCase.toString() + ", "+ Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
-
+        mDevice = IDelectronics + ", " + typePhoneCase.toString() + ", " + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
         System.out.println(mDevice);
     }
 
@@ -65,8 +63,6 @@ class Telephone extends Electronics implements ICrudAction {  //1 type
         Model = n.next();
         System.out.println("Введите название ОС: ");
         NameOperSystem = n.next();
-
-//        mDevice = Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
 
         CountElectronics++;
 

@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 abstract class Electronics implements ICrudAction {
@@ -12,11 +11,12 @@ abstract class Electronics implements ICrudAction {
     String NameOperSystem;
     static int CountElectronics;
 
-    static ArrayList<Electronics> Devices = new ArrayList<>();
+    public Electronics(UUID ID) {
+
+        IDelectronics = ID;
+    }
 
     public static final int getCountElectronics(){
         return CountElectronics;
     }
-
-
 }
