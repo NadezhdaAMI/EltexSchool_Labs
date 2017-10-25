@@ -19,4 +19,5 @@ abstract class Electronics implements ICrudAction {
     public static final int getCountElectronics(){
         return CountElectronics;
     }
+
 }

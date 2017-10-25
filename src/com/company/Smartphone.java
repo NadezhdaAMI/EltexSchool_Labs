@@ -54,7 +54,8 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
     @Override
     public void read() {
 
-        mDevice = IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "+ Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
+        mDevice = IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "
+                + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
 
         System.out.println(mDevice);
 
@@ -92,5 +93,11 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
         Model = null;
         NameOperSystem = null;
         CountElectronics--;
+    }
+
+    @Override
+    public String toString() {
+        return "Smartphone: " + IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "
+                + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem + "\n";
     }
 }

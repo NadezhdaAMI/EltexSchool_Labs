@@ -54,7 +54,8 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
     @Override
     public void read() {
 
-        mDevice = IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
+        mDevice = IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
+                + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
 
         System.out.println(mDevice);
 
@@ -93,5 +94,11 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
         NameOperSystem = null;
         TypeofVideoProc = null;
         CountElectronics--;
+    }
+
+    @Override
+    public String toString() {
+        return "Tablet: " + IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
+                + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem + "\n";
     }
 }
