@@ -17,17 +17,14 @@ public class Orders extends Order {
     // показать все заказы
 
     public void showOrders(){
-        System.out.println("***Подробрее о заказе: ");
-        ListIterator<Object> iterator = order.listIterator();
-        while (iterator.hasNext())
-//            if (order instanceof Electronics) {
-//                System.out.println(iterator.next().toString());
-//                System.out.println();
-//            }
-            System.out.println(iterator.next().toString());
+
+        for (int i = 0; i < order.size() ; i++) {
+            System.out.println(order.get(i));
+
+        }
     }
 
-    public void checkout(Credentials cr, List<Electronics> sh){
+    public void checkout(Credentials cr, ShoppingCart sh){
         this.order = order;
         order.add(cr);
         order.add(sh);
@@ -36,4 +33,7 @@ public class Orders extends Order {
     public void testOrders(){
 
     }
+
+
+
 }

@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Выберете пункт меню: ");
         System.out.println("1 - Найти и добавить товары в корзину"); // пользователь будет генерировать объекты сам, они сразу же добавяются в корзину
         System.out.println("2 - Показать товары, добавленные в корзину");
-//        System.out.println("3 - Выбрать и удалить товары из корзины");
+        System.out.println("3 - Найти товары в корзине");
         System.out.println("4 - Оформить покупку");
         System.out.println("5 - EXIT");
     }
@@ -47,9 +47,9 @@ public class Main {
 
         ArrayList<Electronics> electronics = new ArrayList<>();
 
-        List<Electronics> shoppingCart = new LinkedList<Electronics>();
+//        List<Electronics> shoppingCart = new LinkedList<Electronics>();
 
-//        ShoppingCart<Electronics> shoppingCart = new ShoppingCart<Electronics>();
+        ShoppingCart shoppingCart = new ShoppingCart();
 
         Scanner n = new Scanner(System.in);
 
@@ -102,9 +102,10 @@ public class Main {
             } else if (menu == 2) { // Вывод всех объектов из корзины на экран
                 System.out.println("Всего объектов: " + Electronics.getCountElectronics());
                 System.out.println("Объекты: ");
-                    ListIterator<Electronics> iterator = shoppingCart.listIterator();
-                    while (iterator.hasNext())
-                        System.out.println(iterator.next().toString());
+                for (int i = 0; i < shoppingCart.getSize(); i++) {
+                    System.out.println(shoppingCart.get(i));
+
+                }
 
 //            } else if (menu == 3) { // создание объекта вручную
 //                System.out.println("Введите вид представления: ");
@@ -144,14 +145,14 @@ public class Main {
 //                    System.out.println("Нет такого типа объектов. Попробуйте еще раз!");
 //                }
 
-            } else if (menu == 3) {// удалить объект
+            } else if (menu == 6) {// удалить объект
                 System.out.println("Введите тип объектов для удаления: ");
                 System.out.println("1 - Telephonе");
                 System.out.println("2 - Smartphone");
                 System.out.println("3 - Tablet");
                 int type = n.nextInt();
                 if (type == 1) {
-                    for (Electronics count :electronics) {
+                    for (Electronics count : electronics) {
                         if (count instanceof Telephone)
                             count.delete();
 
@@ -172,6 +173,13 @@ public class Main {
 
                 } else
                     System.out.println("Нет такого типа объектов. Попробуйте еще раз!");
+
+            } else if (menu == 3){ //поиск в корзине по айди
+                System.out.println("Введите ID товара: ");
+                String id = n.next();
+                Electronics l = shoppingCart.search(id);
+                System.out.println("Искомый товар: ");
+                System.out.println(l.toString());
 
 
             } else if (menu == 4) {     // оформить покупку
@@ -194,6 +202,7 @@ public class Main {
                 Orders order = new Orders();
                 order.checkout(credential, shoppingCart);
                 System.out.println("Заказ создан!");
+                System.out.println("***Подробрее о заказе: ");
                 order.showOrders();
 
             }else if (menu == 5) {
