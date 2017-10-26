@@ -1,39 +1,53 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.sql.Time;
+import java.util.*;
 
 public class Orders extends Order {
 
-    private List<Object> order = new ArrayList<>();
+    UUID IDOrder;
 
-    // здесь будет класс коллекция заказ = корзина+фио;
+    private List<Object> ordersAll = new ArrayList<>();
 
-    // время создания;
+    private Date TimeCreation;
+    long TimeWaiting = 10000;
 
-    // время ожидания;
-
-    // показать все заказы
-
-    public void showOrders(){
-
-        for (int i = 0; i < order.size() ; i++) {
-            System.out.println(order.get(i));
-
+    public void showOrdersAll(){
+        for (Object k: ordersAll) {
+            System.out.println(k.toString());
         }
     }
 
+    public List<Object> getOrdersAll() {
+        return ordersAll;
+    }
+
+    public void add(Order o){
+        ordersAll.add(o);
+    }
+
     public void checkout(Credentials cr, ShoppingCart sh){
-        this.order = order;
-        order.add(cr);
-        order.add(sh);
+        super.getOrder().add(cr.toString());
+        super.getOrder().add(sh.toString());
+        ordersAll.add(super.getOrder());
+//        TimeCreation = getCurrentTime();
+    }
+
+    public Date getTimeCreation(){
+        Date currentTime = new Date(System.currentTimeMillis());
+        return currentTime;
+    }
+
+    public UUID getIDOrder() {
+        IDOrder = UUID.randomUUID();
+        return IDOrder;
     }
 
     public void testOrders(){
-
     }
 
-
-
+    @Override
+    public String toString() {
+        return "***"+ ordersAll;
+    }
 }

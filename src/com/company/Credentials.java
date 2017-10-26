@@ -14,6 +14,13 @@ public class Credentials {
 //        this.IDClient = IDClient;
 //    }
 //
+    public void delete(){
+        IDClient = null;
+        Surname = null;
+        Name = null;
+        MiddleName = null;
+        Email = null;
+    }
 
 
     @Override

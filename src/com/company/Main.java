@@ -20,6 +20,7 @@ package com.company;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
+import java.awt.*;
 import java.util.*;
 
 public class Main {
@@ -38,8 +39,13 @@ public class Main {
         System.out.println("1 - Найти и добавить товары в корзину"); // пользователь будет генерировать объекты сам, они сразу же добавяются в корзину
         System.out.println("2 - Показать товары, добавленные в корзину");
         System.out.println("3 - Найти товары в корзине");
-        System.out.println("4 - Оформить покупку");
-        System.out.println("5 - EXIT");
+        System.out.println("4 - Удалить товары из корзины");
+
+        System.out.println("5 - Оформить покупку");
+        System.out.println("6 - Показать ВСЕ заказы");
+//        System.out.println("7 - Показать статусы заказов");
+
+        System.out.println("9 - EXIT");
     }
 
     public static void main(String[] args) {
@@ -52,6 +58,12 @@ public class Main {
         ShoppingCart shoppingCart = new ShoppingCart();
 
         Scanner n = new Scanner(System.in);
+
+        Orders orders = new Orders();
+
+        long startTime = System.currentTimeMillis();
+
+        TreeMap<UUID, Orders> ordersProc = new TreeMap<UUID, Orders>();
 
         while (true) {
 
@@ -102,10 +114,7 @@ public class Main {
             } else if (menu == 2) { // Вывод всех объектов из корзины на экран
                 System.out.println("Всего объектов: " + Electronics.getCountElectronics());
                 System.out.println("Объекты: ");
-                for (int i = 0; i < shoppingCart.getSize(); i++) {
-                    System.out.println(shoppingCart.get(i));
-
-                }
+                shoppingCart.showOrderIn();
 
 //            } else if (menu == 3) { // создание объекта вручную
 //                System.out.println("Введите вид представления: ");
@@ -145,7 +154,7 @@ public class Main {
 //                    System.out.println("Нет такого типа объектов. Попробуйте еще раз!");
 //                }
 
-            } else if (menu == 6) {// удалить объект
+            } else if (menu == 16) {// удалить объект
                 System.out.println("Введите тип объектов для удаления: ");
                 System.out.println("1 - Telephonе");
                 System.out.println("2 - Smartphone");
@@ -174,38 +183,56 @@ public class Main {
                 } else
                     System.out.println("Нет такого типа объектов. Попробуйте еще раз!");
 
-            } else if (menu == 3){ //поиск в корзине по айди
+            } else if (menu == 3) { //поиск в корзине по айди
                 System.out.println("Введите ID товара: ");
                 String id = n.next();
                 Electronics l = shoppingCart.search(id);
+                System.out.println("Товар в корзине найден!");
                 System.out.println("Искомый товар: ");
                 System.out.println(l.toString());
 
+            } else if (menu == 4) {   // Удалить товары из корзины
+                System.out.println("Введите ID товара, который хотите удалить: ");
+                String id = n.next();
+                Electronics l1 = shoppingCart.search(id);
+                shoppingCart.delObjectInShopC(l1);
+                System.out.println("Товар из корзины удален!");
 
-            } else if (menu == 4) {     // оформить покупку
+            } else if (menu == 5) {     // оформить покупку
                 System.out.println("Введите данные(ФИО и email)");
                 Credentials credential = new Credentials();
                 credential.IDClient = UUID.randomUUID();
                 System.out.println("Введите фамилию:");
-                String surn = n.next();
-                credential.Surname = surn;
+                credential.Surname = n.next();
                 System.out.println("Введите имя:");
-                String name1 = n.next();
-                credential.Name = name1;
+                credential.Name = n.next();
                 System.out.println("Введите отчество:");
-                String mname1 = n.next();
-                credential.MiddleName = mname1;
+                credential.MiddleName = n.next();
                 System.out.println("Введите email:");
-                String em = n.next();
-                credential.Email = em;
+                credential.Email = n.next();;
 
                 Orders order = new Orders();
                 order.checkout(credential, shoppingCart);
                 System.out.println("Заказ создан!");
-                System.out.println("***Подробрее о заказе: ");
-                order.showOrders();
+                System.out.println("Дата оформления заказа: ");
+                System.out.println(orders.getTimeCreation()); //  дата оформления заказа< переделать!
 
-            }else if (menu == 5) {
+                System.out.println("***Подробнее о заказе: ");
+                order.showOrder();
+
+                orders.add(order);
+                credential.delete();
+                shoppingCart.clearShopCart();
+
+            }else if (menu == 6) { //Показать все заказы
+                System.out.println("Все заказы: ");
+                orders.showOrdersAll();
+            }else if (menu == 7) {   //Показать статусы всех заказов
+
+
+            }else if (menu == 9) {
+                long finishTime = System.currentTimeMillis();
+                System.out.println("Программа выполнялась: " + (finishTime - startTime)/1000 + " секунд");
                 break;
             } else {
                 System.out.println("Нет такого пункта меню. Попробуйте еще раз!");

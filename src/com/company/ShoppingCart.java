@@ -16,6 +16,12 @@ public class ShoppingCart{
         return null;
     }
 
+    public void showOrderIn(){
+        for (Electronics k: shopCart) {
+            System.out.println(k.toString());
+        }
+    }
+
     public ShoppingCart() {
         this.shopCart = shopCart;
     }
@@ -26,12 +32,19 @@ public class ShoppingCart{
 
     public void add(Electronics object){
         shopCart.add(object);
-
     }
 
-    public void delete(Electronics object){
-        shopCart.remove(object);
+    public void clearShopCart(){
+        shopCart.clear();
+    }
 
+    public void delObjectInShopC(Electronics o){
+        o.IDelectronics = null;
+        o.Name = null;
+        o.Price = 0;
+        o.NameCompany = null;
+        o.Model = null;
+        o.NameOperSystem = null;
     }
 
     public int getSize(){
