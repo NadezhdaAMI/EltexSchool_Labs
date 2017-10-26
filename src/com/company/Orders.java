@@ -10,7 +10,7 @@ public class Orders extends Order {
     private List<Object> ordersAll = new ArrayList<>();
 
     private Date TimeCreation;
-    long TimeWaiting = 10000;
+    long TimeWaiting = 1500000;
 
     public void showOrdersAll(){
         for (Object k: ordersAll) {
@@ -33,8 +33,8 @@ public class Orders extends Order {
 //        TimeCreation = getCurrentTime();
     }
 
-    public Date getTimeCreation(){
-        Date currentTime = new Date(System.currentTimeMillis());
+    public long getTimeCreation(){
+        long currentTime = System.currentTimeMillis();
         return currentTime;
     }
 
@@ -43,8 +43,22 @@ public class Orders extends Order {
         return IDOrder;
     }
 
-    public void testOrders(){
-    }
+    public TreeMap<UUID, Orders> testOrders(TreeMap<UUID, Orders> treeMap){
+        System.out.println("Проверка статуса заказов...");
+        TreeMap<UUID, Orders> treeMap2 = new TreeMap<>();
+        long t = System.currentTimeMillis();
+        for (Map.Entry<UUID, Orders> item: treeMap.entrySet()){
+            long timeObject = item.getValue().getTimeCreation();
+            if ((t - timeObject) > TimeWaiting){
+                System.out.println("Заказ обработан!");
+            }
+            else {
+//                System.out.println("Заказ еще в процессе обработки!");
+                treeMap2.put(item.getKey(), item.getValue());
+            }
+        }
+        return treeMap2;
+      }
 
     @Override
     public String toString() {

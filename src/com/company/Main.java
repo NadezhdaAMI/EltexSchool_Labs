@@ -43,7 +43,7 @@ public class Main {
 
         System.out.println("5 - Оформить покупку");
         System.out.println("6 - Показать ВСЕ заказы");
-//        System.out.println("7 - Показать статусы заказов");
+        System.out.println("7 - Показать статусы заказов");
 
         System.out.println("9 - EXIT");
     }
@@ -204,16 +204,18 @@ public class Main {
                 credential.IDClient = UUID.randomUUID();
                 System.out.println("Введите фамилию:");
                 credential.Surname = n.next();
-                System.out.println("Введите имя:");
-                credential.Name = n.next();
-                System.out.println("Введите отчество:");
-                credential.MiddleName = n.next();
-                System.out.println("Введите email:");
-                credential.Email = n.next();;
+//                System.out.println("Введите имя:");
+//                credential.Name = n.next();
+//                System.out.println("Введите отчество:");
+//                credential.MiddleName = n.next();
+//                System.out.println("Введите email:");
+//                credential.Email = n.next();;
 
                 Orders order = new Orders();
                 order.checkout(credential, shoppingCart);
                 System.out.println("Заказ создан!");
+                ordersProc.put(order.getIDOrder(), order);
+
                 System.out.println("Дата оформления заказа: ");
                 System.out.println(orders.getTimeCreation()); //  дата оформления заказа< переделать!
 
@@ -227,8 +229,12 @@ public class Main {
             }else if (menu == 6) { //Показать все заказы
                 System.out.println("Все заказы: ");
                 orders.showOrdersAll();
-            }else if (menu == 7) {   //Показать статусы всех заказов
-
+            } else if (menu == 7) {   //Показать статусы всех заказов
+                ordersProc = orders.testOrders(ordersProc);
+                System.out.println("А эти заказы еще в процессе обработки: ");
+                for (Map.Entry<UUID, Orders> item: ordersProc.entrySet()){
+                    System.out.println("key " + item.getKey() + ", " + " value "+ item.getValue());
+                }
 
             }else if (menu == 9) {
                 long finishTime = System.currentTimeMillis();

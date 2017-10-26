@@ -25,6 +25,7 @@ public class Credentials {
 
     @Override
     public String toString() {
-        return "Данные клиента: " + IDClient + ", " + Surname + ", "+ Name + ", "+ MiddleName + ", "+ Email;
+        return "Данные клиента: " + IDClient + ", " + Surname;
+//                + ", "+ Name + ", "+ MiddleName + ", "+ Email;
     }
 }
