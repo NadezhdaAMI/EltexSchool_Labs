@@ -3,7 +3,7 @@ package com.company;
 //        Список объектов продажи элетроники 3-х видов: телефоны, сматфоны и планшеты.
 //        Функция поиска товара в магазине и добавление в корзину: пользователь выбирает товар
 //         и количество; выбранное добавляется в корзину автоматически!
-//        После того как первый пользователь оформил покупку, корзина очищается
+//        !!! ТОЛЬКО После того как первый пользователь оформил покупку, корзина очищается
 //          и становятся доступны функции "Показать ВСЕ заказы" и "Показать статусы заказов"
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -22,7 +22,6 @@ public class Main {
         System.out.println("5 - Оформить покупку");
         System.out.println("6 - Показать ВСЕ заказы");
         System.out.println("7 - Показать статусы заказов");
-
         System.out.println("9 - EXIT");
     }
 
@@ -134,12 +133,12 @@ public class Main {
                     credential.IDClient = UUID.randomUUID();
                     System.out.println("Введите фамилию:");
                     credential.Surname = n.next();
-//                System.out.println("Введите имя:");
-//                credential.Name = n.next();
-//                System.out.println("Введите отчество:");
-//                credential.MiddleName = n.next();
-//                System.out.println("Введите email:");
-//                credential.Email = n.next();;
+                    System.out.println("Введите имя:");
+                    credential.Name = n.next();
+                    System.out.println("Введите отчество:");
+                    credential.MiddleName = n.next();
+                    System.out.println("Введите email:");
+                    credential.Email = n.next();
 
                     Orders order = new Orders();
                     order.checkout(credential, shoppingCart);
@@ -148,7 +147,6 @@ public class Main {
 
                     System.out.println("Дата оформления заказа: ");
                     System.out.println(order.getDateCreation()); //  время оформления заказа< переделать!
-
 //                    System.out.println("***Подробнее о заказе: ");
 //                    order.showOrder();
                     orders.add(order);
@@ -158,8 +156,12 @@ public class Main {
 
 
             } else if (menu == 6) { //Показать все заказы
-                System.out.println("Все заказы: ");
-                orders.showOrdersAll();
+                if (ordersProc.size() == 0){
+                    System.out.println("Заказов для обработки пока нет!");
+                } else {
+                        System.out.println("Все заказы: ");
+                        orders.showOrdersAll();
+                }
 
             } else if (menu == 7) {   //Показать статусы всех заказов
                 System.out.println("Проверка статуса заказов...");
