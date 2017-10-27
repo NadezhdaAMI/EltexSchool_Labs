@@ -26,10 +26,6 @@ public class ShoppingCart{
         this.shopCart = shopCart;
     }
 
-    public Electronics get(int index){
-        return (Electronics)shopCart.get(index);
-    }
-
     public void add(Electronics object){
         shopCart.add(object);
     }
@@ -39,20 +35,15 @@ public class ShoppingCart{
     }
 
     public void delObjectInShopC(Electronics o){
-        o.IDelectronics = null;
-        o.Name = null;
-        o.Price = 0;
-        o.NameCompany = null;
-        o.Model = null;
-        o.NameOperSystem = null;
+        shopCart.remove(o);
     }
 
-    public int getSize(){
+    public int shopCartSize(){
         return shopCart.size();
     }
 
     @Override
     public String toString() {
-        return "Выбранные товары: " + "\n" + shopCart;
+        return "\n" + shopCart;
     }
 }

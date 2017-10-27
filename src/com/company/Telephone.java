@@ -81,8 +81,8 @@ class Telephone extends Electronics implements ICrudAction {  //1 type
 
     @Override
     public String toString() {
-        return "Telephone: " + IDelectronics + ", " + typePhoneCase.toString() + ", "
+        return "\n" + "Telephone: " + IDelectronics + ", " + typePhoneCase.toString() + ", "
                 + Name + ", " + Price + "$, " + NameCompany
-                + ", " + Model + ", " + NameOperSystem + "\n";
+                + ", " + Model + ", " + NameOperSystem;
     }
 }
