@@ -15,18 +15,68 @@ public class Main {
 
     public static void MenuClient() {
         System.out.println("Выберите пункт меню: ");
-        System.out.println("1 - Найти и добавить товары в корзину"); // пользователь будет генерировать объекты сам, они сразу же добавяются в корзину
-        System.out.println("2 - Показать товары, добавленные в корзину");
-        System.out.println("3 - Найти товары в корзине");
-        System.out.println("4 - Удалить товары из корзины");
-        System.out.println("5 - Оформить покупку");
+        System.out.println("0 - Введите количество покупателей");
+//        System.out.println("1 - Найти и добавить товары в корзину"); // пользователь будет генерировать объекты сам, они сразу же добавяются в корзину
+//        System.out.println("2 - Показать товары, добавленные в корзину");
+//        System.out.println("3 - Найти товары в корзине");
+//        System.out.println("4 - Удалить товары из корзины");
+//        System.out.println("5 - Оформить покупку");
         System.out.println("6 - Показать ВСЕ заказы");
         System.out.println("7 - Показать статусы заказов");
         System.out.println("9 - EXIT");
     }
 
-    public static void main(String[] args) {
+    public static Credentials randomCredential(Credentials cred){
+
+        Random random = new Random();
+        cred.IDClient = UUID.randomUUID();
+
+        String[] surnameArr = {"Ivanov", "Petrov", "Makarov"};
+        int index_surname = random.nextInt(surnameArr.length);
+        cred.Surname = surnameArr[index_surname];
+
+        String[] nameArr = {"Alex", "Djon", "Gena"};
+        int index_name = random.nextInt(nameArr.length);
+        cred.Name = nameArr[index_name];
+
+        String[] middlenameArr = {"A.", "D.", "B."};
+        int index_middlename = random.nextInt(middlenameArr.length);
+        cred.MiddleName = middlenameArr[index_middlename];
+
+        String[] emailArr = {"nn19005@mail.ru", "ooolkl003@yandex.ru", "spanchbob3@gmail.com"};
+        int index_email = random.nextInt(emailArr.length);
+        cred.Email = emailArr[index_email];
+
+        return cred;
+    }
+    public static ShoppingCart randomShoppingCart(ShoppingCart shopcart){
         UUID ID;
+        Random random= new Random();
+        int T = random.nextInt(5);
+        for (int i = 0; i < T; i++) {
+            ID = UUID.randomUUID();
+            Telephone telephone = new Telephone(ID);
+            telephone.create();
+            shopcart.add(telephone);
+        }
+        int S = random.nextInt(5);
+        for (int i = 0; i < S; i++) {
+            ID = UUID.randomUUID();
+            Smartphone smartphone = new Smartphone(ID);
+            smartphone.create();
+            shopcart.add(smartphone);
+        }
+        int Tb = random.nextInt(5);
+        for (int i = 0; i < Tb; i++) {
+            ID = UUID.randomUUID();
+            Tablet tablet = new Tablet(ID);
+            tablet.create();
+            shopcart.add(tablet);
+        }
+        return shopcart;
+    }
+
+    public static void main(String[] args) {
 
         ShoppingCart shoppingCart = new ShoppingCart();
 
@@ -43,49 +93,28 @@ public class Main {
             MenuClient();
             int menu = n.nextInt();
 
-            if (menu == 1) { // Создать объект(ы) со случайными значениями и добавить в корзину
-                System.out.println("Введите вид представления: ");
-                System.out.println("1 - Telephonе");
-                System.out.println("2 - Smartphone");
-                System.out.println("3 - Tablet");
+            if (menu == 0){ //Ввести количество покупателей и Создать заказы
+                System.out.println("Введите количество клиентов:");
+                int countClients = n.nextInt();
+                for (int i = 0; i < countClients; i++) {
+                    System.out.println("Регистрация клиента");
 
-                int type = n.nextInt();
-                if (type == 1 || type == 2 || type == 3){
+                    Credentials credential = new Credentials();
 
-                System.out.println("Введите кол-во объектов: ");
-                int N = n.nextInt();
-                if (type == 1) {
-                    while (N != 0) {
-                        ID = UUID.randomUUID();
-                        Telephone telephone = new Telephone(ID);
-                        telephone.create();
-                        shoppingCart.add(telephone);
-                        N--;
-                    }
-                    System.out.println("Товары добавлены в корзину!");
+                    randomCredential(credential);
 
-                } else if (type == 2) {
-                    while (N != 0) {
-                        ID = UUID.randomUUID();
-                        Smartphone smartphone = new Smartphone(ID);
-                        smartphone.create();
-                        shoppingCart.add(smartphone);
-                        N--;
-                    }
-                    System.out.println("Товары добавлены в корзину!");
-                } else if (type == 3) {
-                    while (N != 0) {
-                        ID = UUID.randomUUID();
-                        Tablet tablet = new Tablet(ID);
-                        tablet.create();
-                        shoppingCart.add(tablet);
-                        N--;
-                    }
-                    System.out.println("Товары добавлены в корзину!");
-                 }
+                    randomShoppingCart(shoppingCart);
+
+                    Orders order = new Orders();
+                    order.checkout(credential, shoppingCart);
+                    System.out.println("Заказ создан!");
+                    ordersProc.put(order.getIDOrder(), order);
+
+                    System.out.println("Дата оформления заказа: ");
+                    System.out.println(order.getDateCreation()); //
+                    orders.add(order);
+                    shoppingCart.clearShopCart();
                 }
-                else
-                    System.out.println("Нет такого типа объектов. Попробуйте еще раз!");
 
             } else if (menu == 2) { // Вывод всех объектов из корзины на экран
                 if (shoppingCart.shopCartSize() == 0)
@@ -128,35 +157,12 @@ public class Main {
                 if (shoppingCart.shopCartSize() == 0)
                     System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
                 else {
-                    System.out.println("Введите данные(ФИО и email)");
-                    Credentials credential = new Credentials();
-                    credential.IDClient = UUID.randomUUID();
-                    System.out.println("Введите фамилию:");
-                    credential.Surname = n.next();
-                    System.out.println("Введите имя:");
-                    credential.Name = n.next();
-                    System.out.println("Введите отчество:");
-                    credential.MiddleName = n.next();
-                    System.out.println("Введите email:");
-                    credential.Email = n.next();
 
-                    Orders order = new Orders();
-                    order.checkout(credential, shoppingCart);
-                    System.out.println("Заказ создан!");
-                    ordersProc.put(order.getIDOrder(), order);
-
-                    System.out.println("Дата оформления заказа: ");
-                    System.out.println(order.getDateCreation()); //  время оформления заказа< переделать!
-//                    System.out.println("***Подробнее о заказе: ");
-//                    order.showOrder();
-                    orders.add(order);
-                    credential.delete();
-                    shoppingCart.clearShopCart();
                 }
 
 
             } else if (menu == 6) { //Показать все заказы
-                if (ordersProc.size() == 0){
+                if (orders.size() == 0){
                     System.out.println("Заказов для обработки пока нет!");
                 } else {
                         System.out.println("Все заказы: ");

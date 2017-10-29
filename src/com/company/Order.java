@@ -9,6 +9,8 @@ public class Order {
     private List<Object> order = new ArrayList<>();
 
     public long TimeCreation;
+    public long TimeWaiting;
+
     public Date dateCreation;
 
     public List<Object> getOrder() {
@@ -19,6 +21,14 @@ public class Order {
         for (Object k: order) {
             System.out.println(k.toString());
         }
+    }
+
+    public void setTimeWaiting(long timeWaiting) {
+        TimeWaiting = timeWaiting;
+    }
+
+    public long getTimeWaiting() {
+        return TimeWaiting;
     }
 
     public void setTimeCreation(long timeCreation) {

@@ -44,6 +44,6 @@ public class ShoppingCart{
 
     @Override
     public String toString() {
-        return "\n" + shopCart;
+        return /*"\n" + */shopCart.toString();
     }
 }

@@ -10,12 +10,16 @@ public class Orders extends Order { // orders это объединение да
     private List<Object> ordersAll = new ArrayList<>();
 
 
-    private long TimeWaiting = 15000;
+    private final long TimeWaiting = 3000; // время обработки одного товара в корзине
 
     public void showOrdersAll(){
         for (Object k: ordersAll) {
             System.out.println(k.toString());
         }
+    }
+
+    public int size(){
+        return ordersAll.size();
     }
 
     public List<Object> getOrdersAll() {
@@ -39,19 +43,20 @@ public class Orders extends Order { // orders это объединение да
     }
 
     public TreeMap<UUID, Orders> testOrders(TreeMap<UUID, Orders> treeMap){
-        TreeMap<UUID, Orders> treeMap2 = new TreeMap<>();
+        TreeMap<UUID, Orders> treeMapTest = new TreeMap<>();
         for (Map.Entry<UUID, Orders> item: treeMap.entrySet()){
+            item.getValue().setTimeWaiting(TimeWaiting*item.getValue().getOrder().size());
             long timeObject = item.getValue().getTimeCreation();
             long t = System.currentTimeMillis();
-            if ((t - timeObject) > TimeWaiting){
+            if ((t - timeObject) > item.getValue().getTimeWaiting()){
                 System.out.println("Заказ обработан! так как с момента создания заказа прошло " + (t - timeObject)/1000 + "sec," + " заказ: " + item.getValue().getOrdersAll().toString());
             }
             else {
 //                System.out.println("Заказ еще в процессе обработки!");
-                treeMap2.put(item.getKey(), item.getValue());
+                treeMapTest.put(item.getKey(), item.getValue());
             }
         }
-        return treeMap2;
+        return treeMapTest;
       }
 
     @Override
