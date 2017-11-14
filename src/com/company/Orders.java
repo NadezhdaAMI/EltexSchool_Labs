@@ -3,14 +3,17 @@ package com.company;
 import java.sql.Time;
 import java.util.*;
 
-public class Orders extends Order { // orders это объединение данных клиента и корзины
+public class Orders<T> { // orders это объединение данных клиента и корзины
 
     UUID IDOrder;
 
-    private List<Object> ordersAll = new ArrayList<>();
+    private List<T> ordersAll = new ArrayList<>();
+
+    public long TimeCreation;
+    public long TimeWaiting;
 
 
-    private final long TimeWaiting = 3000; // время обработки одного товара в корзине
+    private final long TimeWaitingT = 3000; // время обработки одного товара в корзине
 
     public void showOrdersAll(){
         for (Object k: ordersAll) {
@@ -22,19 +25,22 @@ public class Orders extends Order { // orders это объединение да
         return ordersAll.size();
     }
 
-    public List<Object> getOrdersAll() {
+    public List<T> getOrdersAll() {
         return ordersAll;
     }
 
-    public void add(Order o){
+    public void add(T o){
         ordersAll.add(o);
     }
 
     public void checkout(Credentials cr, ShoppingCart sh){
-        super.getOrder().add(cr.toString());
-        super.getOrder().add(sh.toString());
-        ordersAll.add(super.getOrder());
-        super.setTimeCreation(System.currentTimeMillis());
+        T order = (T) new Order(sh, cr);
+        ordersAll.add(order);
+
+//        super.getOrder().add(cr.toString());
+//        super.getOrder().add(sh.toString());
+//        ordersAll.add(super.getOrder());
+//        super.setTimeCreation(System.currentTimeMillis());
     }
 
     public UUID getIDOrder() {
@@ -44,8 +50,10 @@ public class Orders extends Order { // orders это объединение да
 
     public TreeMap<UUID, Orders> testOrders(TreeMap<UUID, Orders> treeMap){
         TreeMap<UUID, Orders> treeMapTest = new TreeMap<>();
-        for (Map.Entry<UUID, Orders> item: treeMap.entrySet()){
-            item.getValue().setTimeWaiting(TimeWaiting*item.getValue().getOrder().size());
+        for (Map.Entry<UUID, Orders> item: treeMap.entrySet())
+        {
+
+            item.getValue().setTimeWaiting(TimeWaitingT*item.getValue().ordersAll.size());
             long timeObject = item.getValue().getTimeCreation();
             long t = System.currentTimeMillis();
             if ((t - timeObject) > item.getValue().getTimeWaiting()){
@@ -62,5 +70,21 @@ public class Orders extends Order { // orders это объединение да
     @Override
     public String toString() {
         return " "+ ordersAll;
+    }
+
+    public void setTimeWaiting(long timeWaiting) {
+        TimeWaiting = timeWaiting;
+    }
+
+    public long getTimeWaiting() {
+        return TimeWaiting;
+    }
+
+    public void setTimeCreation(long timeCreation) {
+        TimeCreation = timeCreation;
+    }
+
+    public long getTimeCreation() {
+        return TimeCreation;
     }
 }

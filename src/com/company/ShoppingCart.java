@@ -3,12 +3,12 @@ package com.company;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ShoppingCart{
+public class ShoppingCart<T extends Electronics>{
 
-    private List<Electronics> shopCart = new LinkedList<>();
+    private List<T> shopCart = new LinkedList<>();
 
-    public Electronics search(String id){  // поиск товара в корзине по айди.
-        for (Electronics k: shopCart) {
+    public T search(String id){  // поиск товара в корзине по айди.
+        for (T k: shopCart) {
             if (k.IDelectronics.toString().equals(id)){
                 return k;
             }
@@ -26,7 +26,7 @@ public class ShoppingCart{
         this.shopCart = shopCart;
     }
 
-    public void add(Electronics object){
+    public void add(T object){
         shopCart.add(object);
     }
 
@@ -34,7 +34,7 @@ public class ShoppingCart{
         shopCart.clear();
     }
 
-    public void delObjectInShopC(Electronics o){
+    public void delObjectInShopC(T o){
         shopCart.remove(o);
     }
 

@@ -10,6 +10,7 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class Main {
 
@@ -78,6 +79,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        List<Electronics> shopCart = new LinkedList<>();
+
         ShoppingCart shoppingCart = new ShoppingCart();
 
         Scanner n = new Scanner(System.in);
@@ -111,7 +114,7 @@ public class Main {
                     ordersProc.put(order.getIDOrder(), order);
 
                     System.out.println("Дата оформления заказа: ");
-                    System.out.println(order.getDateCreation()); //
+//                    System.out.println(order.getDateCreation()); //
                     orders.add(order);
                     shoppingCart.clearShopCart();
                 }
