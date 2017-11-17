@@ -79,9 +79,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Electronics> shopCart = new LinkedList<>();
 
-        ShoppingCart shoppingCart = new ShoppingCart();
 
         Scanner n = new Scanner(System.in);
 
@@ -89,7 +87,8 @@ public class Main {
 
         long startTime = System.currentTimeMillis();
 
-        TreeMap<UUID, Orders> ordersProc = new TreeMap<>();
+        TreeMap<UUID, Order> ordersProc = new TreeMap<>();
+        TreeMap<UUID, Order> ordersSave = new TreeMap<>();
 
         while (true) {
 
@@ -100,77 +99,94 @@ public class Main {
                 System.out.println("Введите количество клиентов:");
                 int countClients = n.nextInt();
                 for (int i = 0; i < countClients; i++) {
-                    System.out.println("Регистрация клиента");
+                    System.out.println("Регистрация клиента...");
 
                     Credentials credential = new Credentials();
+                    ShoppingCart shoppingCart = new ShoppingCart();
 
                     randomCredential(credential);
 
                     randomShoppingCart(shoppingCart);
 
-                    Orders order = new Orders();
-                    order.checkout(credential, shoppingCart);
+                    orders.checkout(credential, shoppingCart);
+//                    Orders order = new Orders();
+//                    order.checkout(credential, shoppingCart);
                     System.out.println("Заказ создан!");
+                    Order order = (Order) orders.returnOrderONE(i);
                     ordersProc.put(order.getIDOrder(), order);
+                    ordersSave.put(order.getIDOrder(), order);
 
-                    System.out.println("Дата оформления заказа: ");
-//                    System.out.println(order.getDateCreation()); //
-                    orders.add(order);
-                    shoppingCart.clearShopCart();
+//                    ordersProc.put(order.getIDOrder(), order);
+
+//                    System.out.println("Дата оформления заказа: ");
+//                    System.out.println(order.getTimeCreation()); //
+
+//                    orders.add(order);
+//                    shoppingCart.clearShopCart();
                 }
 
-            } else if (menu == 2) { // Вывод всех объектов из корзины на экран
-                if (shoppingCart.shopCartSize() == 0)
-                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
-                else {
-                    System.out.println("Всего товаров в корзине: " + shoppingCart.shopCartSize());
-                    System.out.println("Подробнее о каждом товаре: ");
-                    shoppingCart.showOrderIn();}
-
-            } else if (menu == 3) { //поиск в корзине по айди
-                if (shoppingCart.shopCartSize() == 0)
-                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
-                else {
-                    System.out.println("Введите ID товара: ");
-                    String id = n.next();
-                    Electronics l = shoppingCart.search(id);
-                    if (l != null) {
-                        System.out.println("Товар в корзине найден!");
-                        System.out.println("Искомый товар: ");
-                        System.out.println(l.toString());
-                    }
-                    else System.out.println("В корзине нет товара с таким ID!");
-                }
-
-            } else if (menu == 4) {   // Удалить товары из корзины
-                if (shoppingCart.shopCartSize() == 0)
-                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
-                else {
-                    System.out.println("Введите ID товара, который хотите удалить из корзины: ");
-                    String id = n.next();
-                    Electronics l1 = shoppingCart.search(id);
-                    if (l1 != null) {
-                        shoppingCart.delObjectInShopC(l1);
-                        System.out.println("Товар из корзины удален!");
-                    }
-                    else System.out.println("В корзине нет товара с таким ID!");
-                }
-
-            } else if (menu == 5) {     // оформить покупку
-                if (shoppingCart.shopCartSize() == 0)
-                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
-                else {
-
-                }
+//            } else if (menu == 2) { // Вывод всех объектов из корзины на экран
+//                if (shoppingCart.shopCartSize() == 0)
+//                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
+//                else {
+//                    System.out.println("Всего товаров в корзине: " + shoppingCart.shopCartSize());
+//                    System.out.println("Подробнее о каждом товаре: ");
+//                    shoppingCart.showOrderIn();}
+//
+//            } else if (menu == 3) { //поиск в корзине по айди
+//                if (shoppingCart.shopCartSize() == 0)
+//                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
+//                else {
+//                    System.out.println("Введите ID товара: ");
+//                    String id = n.next();
+//                    Electronics l = shoppingCart.search(id);
+//                    if (l != null) {
+//                        System.out.println("Товар в корзине найден!");
+//                        System.out.println("Искомый товар: ");
+//                        System.out.println(l.toString());
+//                    }
+//                    else System.out.println("В корзине нет товара с таким ID!");
+//                }
+//
+//            } else if (menu == 4) {   // Удалить товары из корзины
+//                if (shoppingCart.shopCartSize() == 0)
+//                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
+//                else {
+//                    System.out.println("Введите ID товара, который хотите удалить из корзины: ");
+//                    String id = n.next();
+//                    Electronics l1 = shoppingCart.search(id);
+//                    if (l1 != null) {
+//                        shoppingCart.delObjectInShopC(l1);
+//                        System.out.println("Товар из корзины удален!");
+//                    }
+//                    else System.out.println("В корзине нет товара с таким ID!");
+//                }
+//
+//            } else if (menu == 5) {     // оформить покупку
+//                if (shoppingCart.shopCartSize() == 0)
+//                    System.out.println("Ваша корзина пуста! Сначала добавьте товары.. ");
+//                else {
+//
+//                }
 
 
             } else if (menu == 6) { //Показать все заказы
-                if (orders.size() == 0){
+                if (orders.size() == 0) {
                     System.out.println("Заказов для обработки пока нет!");
                 } else {
-                        System.out.println("Все заказы: ");
-                        orders.showOrdersAll();
+//                    System.out.println("Все заказы: ");
+//                    for (int i = 0; i < orders.size(); i++) {
+//                        Order order = (Order) orders.returnOrderONE(i);
+//                        System.out.println(order.toString()/* + " " + ordersProc.get(order.getIDOrder()).getCart().toString()*/);
+//                    }
+//                }
+                for (Map.Entry<UUID, Order> item : ordersSave.entrySet()) {
+                    System.out.println(item.getValue().getCred().toString() + "*&&&||||");
+                    item.getValue().getCart().showOrderIn();
+                    System.out.println("///////");
+
                 }
+            }
 
             } else if (menu == 7) {   //Показать статусы всех заказов
                 System.out.println("Проверка статуса заказов...");
@@ -180,7 +196,7 @@ public class Main {
                 }
                 else {
                     System.out.println("А эти заказы еще в процессе обработки: ");
-                    for (Map.Entry<UUID, Orders> item: ordersProc.entrySet()){
+                    for (Map.Entry<UUID, Order> item: ordersProc.entrySet()){
                         System.out.println("ID заказа: " + item.getKey() + ", " + " заказ: "+ item.getValue());
                     }
                 }

@@ -20,6 +20,9 @@ abstract class Electronics implements ICrudAction {
         return CountElectronics;
     }
 
-
-
+    @Override
+    public String toString() {
+        return IDelectronics + ", " + Name + ", "+ Price + ", "+ Price + ", "
+                + NameCompany + ", " + Model + ", "+ NameOperSystem;
+    }
 }

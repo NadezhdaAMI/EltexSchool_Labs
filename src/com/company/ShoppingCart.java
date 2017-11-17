@@ -7,6 +7,7 @@ public class ShoppingCart<T extends Electronics>{
 
     private List<T> shopCart = new LinkedList<>();
 
+
     public T search(String id){  // поиск товара в корзине по айди.
         for (T k: shopCart) {
             if (k.IDelectronics.toString().equals(id)){
@@ -17,6 +18,7 @@ public class ShoppingCart<T extends Electronics>{
     }
 
     public void showOrderIn(){
+        System.out.println(shopCart.size());
         for (Electronics k: shopCart) {
             System.out.println(k.toString());
         }
@@ -44,6 +46,11 @@ public class ShoppingCart<T extends Electronics>{
 
     @Override
     public String toString() {
-        return /*"\n" + */shopCart.toString();
+//        System.out.println("Здесь должны быть заказы!!");
+//        for (Electronics k: shopCart) {
+//            System.out.println(" zzz" + k.toString());
+//            System.out.println("dd");
+//        }
+        return " *:" + "shopcart";
     }
 }
