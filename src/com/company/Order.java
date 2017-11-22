@@ -16,7 +16,7 @@ public class Order {
     private long TimeCreation;
     private long TimeWaiting;
 
-    private final long TimeWaitingONE = 10; // время обработки одного товара в корзине
+    private final long TimeWaitingONE = 100; // время обработки одного товара в корзине
 
     private long dateCreation;
 
@@ -76,6 +76,6 @@ public class Order {
 
     @Override
     public String toString() {
-        return " " + cred.toString() + getCart();
+        return " " + getIDOrder() + ", " + cred.toString() + getCart();
     }
 }

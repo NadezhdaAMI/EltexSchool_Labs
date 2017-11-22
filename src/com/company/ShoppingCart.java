@@ -38,8 +38,13 @@ public class ShoppingCart<T extends Electronics>{
         return shopCart.size();
     }
 
+//    @Override                             //чтобы посмотреть заказы полностью с содерж корзины
+//    public String toString() {
+//        return " *:" + getShopCart();
+//    }
+
     @Override
     public String toString() {
-        return " *:" + getShopCart();
+        return " *: There are electronics!";
     }
 }

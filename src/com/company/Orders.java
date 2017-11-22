@@ -20,6 +20,12 @@ public class Orders<T> { // orders это объединение данных к
         ordersAll.add(order);
     }
 
+    public void showOrdersAll(){
+        for (Object k: ordersAll) {
+        System.out.println(k.toString());
+        }
+    }
+
     @Override
     public String toString() {
         return " "+ ordersAll;

@@ -11,8 +11,12 @@ public class Credentials {
     String MiddleName;
     String Email;
 
+    public UUID getIDClient() {
+        return IDClient;
+    }
+
     @Override
     public String toString() {
-        return IDClient + ", " + Surname + ", "+ Name + ", "+ MiddleName + ", "+ Email;
+        return /*IDClient + ", " + */ Surname + ", "+ Name + ", "+ MiddleName + ", "+ Email;
     }
 }
