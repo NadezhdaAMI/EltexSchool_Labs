@@ -26,16 +26,12 @@ public class ShoppingCart<T extends Electronics>{
         this.shopCart = shopCart;
     }
 
+    public List<T> getShopCart() {
+        return shopCart;
+    }
+
     public void add(T object){
         shopCart.add(object);
-    }
-
-    public void clearShopCart(){
-        shopCart.clear();
-    }
-
-    public void delObjectInShopC(T o){
-        shopCart.remove(o);
     }
 
     public int shopCartSize(){
@@ -44,6 +40,6 @@ public class ShoppingCart<T extends Electronics>{
 
     @Override
     public String toString() {
-        return /*"\n" + */shopCart.toString();
+        return " *:" + getShopCart();
     }
 }

@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Order {
 
@@ -10,48 +11,71 @@ public class Order {
 
     private Credentials cred;
 
-//    private List<Object> order = new ArrayList<>();
+    private UUID IDOrder;
 
-//    public long TimeCreation;
-//    public long TimeWaiting;
+    private long TimeCreation;
+    private long TimeWaiting;
 
-//    public Date dateCreation;
+    private final long TimeWaitingONE = 10; // время обработки одного товара в корзине
 
-//    public List<Object> getOrder() {
-//        return order;
-//    }
+    private long dateCreation;
 
+    public static volatile boolean isAwaiting = false;
+    public static volatile boolean isProcessed = false;
+//    public boolean setIsAwaiting;
 
+    public boolean getisAwaiting() {
+        return isAwaiting;
+    }
+
+    public boolean getisProcessed() {
+        return isProcessed;
+    }
+
+    public static void setIsAwaiting(boolean isAwaiting) {
+        Order.isAwaiting = isAwaiting;
+    }
+
+    public static void setIsProcessed(boolean isProcessed) {
+        Order.isProcessed = isProcessed;
+    }
 
     public Order(ShoppingCart cart, Credentials cred) {
         this.cart = cart;
         this.cred = cred;
+        this.dateCreation = System.currentTimeMillis();
+        setTimeCreation(this.dateCreation);
+        this.setTimeWaiting(TimeWaitingONE*(cart.shopCartSize()));
+        this.IDOrder = UUID.randomUUID();
+        isAwaiting = true;
     }
 
-//    public void showOrder(){
-//        for (Object k: order) {
-//            System.out.println(k.toString());
-//        }
-//    }
+    public void setTimeWaiting(long timeWaiting) {
+        TimeWaiting = timeWaiting;
+    }
 
-//    public void setTimeWaiting(long timeWaiting) {
-//        TimeWaiting = timeWaiting;
-//    }
-//
-//    public long getTimeWaiting() {
-//        return TimeWaiting;
-//    }
-//
-//    public void setTimeCreation(long timeCreation) {
-//        TimeCreation = timeCreation;
-//    }
-//
-//    public long getTimeCreation() {
-//        return TimeCreation;
-//    }
+    public long getTimeWaiting() {
+        return TimeWaiting;
+    }
 
-//    public Date getDateCreation() {
-//        dateCreation = new Date();
-//        return dateCreation;
-//    }
+    public void setTimeCreation(long timeCreation) {
+        TimeCreation = timeCreation;
+    }
+
+    public long getTimeCreation() {
+        return TimeCreation;
+    }
+
+    public UUID getIDOrder() {
+        return IDOrder;
+    }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    @Override
+    public String toString() {
+        return " " + cred.toString() + getCart();
+    }
 }
