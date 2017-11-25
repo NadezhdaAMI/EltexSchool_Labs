@@ -1,11 +1,13 @@
-package com.company;
+package ru.mitina.check;
+
+import ru.mitina.check.Acheck;
+import ru.mitina.orders.Order;
 
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import static com.company.Main.oneOrders;
-import static com.company.Main.ordersProc;
+import static ru.mitina.Main.ordersProc;
 
 /**
  * Created by Nadezhda on 17.11.2017.

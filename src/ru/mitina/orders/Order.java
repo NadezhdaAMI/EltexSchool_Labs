@@ -1,11 +1,9 @@
-package com.company;
+package ru.mitina.orders;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Order {
+public class Order implements Serializable{
 
     private ShoppingCart cart;
 

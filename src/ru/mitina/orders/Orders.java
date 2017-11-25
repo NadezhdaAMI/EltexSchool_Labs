@@ -1,9 +1,9 @@
-package com.company;
+package ru.mitina.orders;
 
-import java.sql.Time;
+import java.io.Serializable;
 import java.util.*;
 
-public class Orders<T> { // orders это объединение данных клиента и корзины
+public class Orders<T> implements Serializable{ // orders это объединение данных клиента и корзины
 
     private List<T> ordersAll = new ArrayList<>(); //
 

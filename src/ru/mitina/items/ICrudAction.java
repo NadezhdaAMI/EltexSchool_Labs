@@ -1,4 +1,4 @@
-package com.company;
+package ru.mitina.items;
 
 public interface ICrudAction {
     void create();

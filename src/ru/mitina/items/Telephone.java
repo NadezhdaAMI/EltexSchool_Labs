@@ -1,50 +1,42 @@
-package com.company;
+package ru.mitina.items;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 
-class Smartphone extends Electronics implements ICrudAction {   //2 type
-    enum SimcardCase {usual, micro_Sim};
-    SimcardCase TypeofSimcard;
-    int NumberOfSimCard;
 
+class Telephone extends Electronics implements ICrudAction, Serializable {  //1 type
+    enum PhoneCase {classical, clamshell};
+    PhoneCase typePhoneCase;
     public String mDevice;
 
-    public Smartphone(UUID IDelectronics) {
-        super(IDelectronics);
+    public Telephone(UUID ID) {
+        super(ID);
     }
 
     @Override
     public void create() {
         Random random = new Random();
-
-        IDelectronics = UUID.randomUUID();
-
-        TypeofSimcard = SimcardCase.values()[random.nextInt(SimcardCase.values().length)];
-
-        int[] numerSimCa = {1, 2};
-        int index_number = random.nextInt(numerSimCa.length);
-        NumberOfSimCard = numerSimCa[index_number];
-
+        typePhoneCase = PhoneCase.values()[random.nextInt(PhoneCase.values().length)];
 
         String[] nameArr = {"Apple", "Samsung", "Nokia", "ASUS"};
         int index_Name = random.nextInt(nameArr.length);
         Name = nameArr[index_Name];
 
-        int[] priceArr = {1400, 1450, 1500, 1700};
+        int[] priceArr = {400, 450, 500, 700};
         int index_Price = random.nextInt(priceArr.length);
         Price = priceArr[index_Price];
 
-        String[] nameCoArr = {"Apple Co.", "Samsung Co.", "Nokia Co.", "ASUS Co."};
+        String[] nameCoArr = {"Apple Co.", "Samsung C.", "Nokia C.", "ASUS C."};
         int index_NameCo = random.nextInt(nameCoArr.length);
         NameCompany = nameCoArr[index_NameCo];
 
-        String[] modelArr = {"sm1", "sm2", "sm3", "sm5"};
+        String[] modelArr = {"x1", "x2", "x3", "x5"};
         int index_model = random.nextInt(modelArr.length);
         Model = modelArr[index_model];
 
-        String[] NameOperSystemArr = {"5.2", "3.5", "97.8", "3.1"};
+        String[] NameOperSystemArr = {"7.2", "8.5", "9.8", "9.1"};
         int index_NameOperSystem = random.nextInt(NameOperSystemArr.length);
         NameOperSystem = NameOperSystemArr[index_NameOperSystem];
 
@@ -54,16 +46,12 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
     @Override
     public void read() {
 
-        mDevice = IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "
-                + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
-
+        mDevice = ID + ", " + typePhoneCase.toString() + ", " + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
         System.out.println(mDevice);
-
     }
 
     @Override
     public void update() {
-
         System.out.println("Добавим объект:");
         Scanner n = new Scanner(System.in);
         System.out.println("Введите имя: ");
@@ -80,13 +68,10 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
         CountElectronics++;
 
         System.out.println("Объект добавлен!");
-
     }
 
     @Override
     public void delete() {
-        IDelectronics = null;
-        NumberOfSimCard = 0;
         Name = null;
         Price = 0;
         NameCompany = null;
@@ -97,7 +82,8 @@ class Smartphone extends Electronics implements ICrudAction {   //2 type
 
     @Override
     public String toString() {
-        return "Smartphone: " + IDelectronics + ", " + TypeofSimcard.toString() + ", " + NumberOfSimCard + "simka(i), "
-                + Name + ", " + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem + "\n";
+        return "\n" + "Telephone: " + ID + ", " + typePhoneCase.toString() + ", "
+                + Name + ", " + Price + "$, " + NameCompany
+                + ", " + Model + ", " + NameOperSystem;
     }
 }

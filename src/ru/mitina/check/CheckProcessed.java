@@ -1,22 +1,24 @@
-package com.company;
+package ru.mitina.check;
+
+import ru.mitina.Main;
+import ru.mitina.check.Acheck;
+import ru.mitina.orders.Order;
 
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import static com.company.Main.ordersProc;
-
 /**
  * Created by Nadezhda on 17.11.2017.
  */
-public class CheckProcessed extends Acheck{
+public class CheckProcessed extends Acheck {
 
     public CheckProcessed(TreeMap<UUID, Order> ordersProc) {
         super();
     }
 
     public void run() {
-        testOrdersPros(ordersProc);
+        testOrdersPros(Main.ordersProc);
     }
 
     private void testOrdersPros(TreeMap<UUID, Order> ordersLoc) throws NullPointerException{

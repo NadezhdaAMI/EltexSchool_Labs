@@ -1,11 +1,10 @@
-package com.company;
+package ru.mitina.check;
 
-import java.util.TreeMap;
-import java.util.UUID;
-
-import static com.company.Main.ordersProc;
-import static com.company.Main.randomCredential;
-import static com.company.Main.randomShoppingCart;
+import ru.mitina.Main;
+import ru.mitina.orders.Credentials;
+import ru.mitina.orders.Order;
+import ru.mitina.orders.Orders;
+import ru.mitina.orders.ShoppingCart;
 
 public class GenerateOrders implements Runnable {
 
@@ -32,12 +31,12 @@ public class GenerateOrders implements Runnable {
 
             Credentials credential = new Credentials();
             ShoppingCart shoppingCart = new ShoppingCart();
-            randomCredential(credential);
-            randomShoppingCart(shoppingCart);
+            Main.randomCredential(credential);
+            Main.randomShoppingCart(shoppingCart);
             orders.checkout(credential, shoppingCart);
 
             Order order = (Order) orders.returnOrderONE(i);
-            ordersProc.put(order.getIDOrder(), order);
+            Main.ordersProc.put(order.getIDOrder(), order);
         }
         System.out.println("Все заказы: ");
         orders.showOrdersAll();

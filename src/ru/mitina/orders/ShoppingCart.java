@@ -1,15 +1,18 @@
-package com.company;
+package ru.mitina.orders;
 
+import ru.mitina.items.Electronics;
+
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ShoppingCart<T extends Electronics>{
+public class ShoppingCart<T extends Electronics> implements Serializable{
 
     private List<T> shopCart = new LinkedList<>();
 
     public T search(String id){  // поиск товара в корзине по айди.
         for (T k: shopCart) {
-            if (k.IDelectronics.toString().equals(id)){
+            if (k.ID.toString().equals(id)){
                 return k;
             }
         }

@@ -1,9 +1,9 @@
-package com.company;
+package ru.mitina.items;
 
 import java.util.UUID;
 
-abstract class Electronics implements ICrudAction {
-    UUID IDelectronics;
+public abstract class Electronics implements ICrudAction {
+    public UUID ID;
     String Name;
     int Price;
     String NameCompany;
@@ -13,7 +13,7 @@ abstract class Electronics implements ICrudAction {
 
     public Electronics(UUID ID) {
 
-        IDelectronics = ID;
+        this.ID = ID;
     }
 
     public static final int getCountElectronics(){
@@ -22,7 +22,7 @@ abstract class Electronics implements ICrudAction {
 
     @Override
     public String toString() {
-        return IDelectronics + ", " + Name + ", "+ Price + ", "+ Price + ", "
+        return ID + ", " + Name + ", "+ Price + ", "+ Price + ", "
                 + NameCompany + ", " + Model + ", "+ NameOperSystem;
     }
 

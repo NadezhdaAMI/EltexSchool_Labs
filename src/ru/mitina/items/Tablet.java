@@ -1,11 +1,12 @@
-package com.company;
+package ru.mitina.items;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 
 
-class Tablet extends Electronics implements ICrudAction{ //3 type
+class Tablet extends Electronics implements ICrudAction, Serializable { //3 type
     public String mDevice;
     enum VideoProc {Nvidia_Tegra, Intel_Atom, RockChip};
     VideoProc TypeofVideoProc;
@@ -21,7 +22,7 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
     public void create()  {
         Random random = new Random();
 
-        IDelectronics = UUID.randomUUID();
+        ID = UUID.randomUUID();
 
         TypeofVideoProc = VideoProc.values()[random.nextInt(VideoProc.values().length)];
 
@@ -54,7 +55,7 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
     @Override
     public void read() {
 
-        mDevice = IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
+        mDevice = ID + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
                 + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem;
 
         System.out.println(mDevice);
@@ -85,7 +86,7 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
 
     @Override
     public void delete() {
-        IDelectronics = null;
+        ID = null;
         TypeofScreenresol = null;
         Name = null;
         Price = 0;
@@ -98,7 +99,7 @@ class Tablet extends Electronics implements ICrudAction{ //3 type
 
     @Override
     public String toString() {
-        return "Tablet: " + IDelectronics + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
+        return "Tablet: " + ID + ", " + TypeofVideoProc.toString() + ", " + TypeofScreenresol + ", " + Name + ", "
                 + Price + "$, " + NameCompany + ", " + Model + ", " + NameOperSystem + "\n";
     }
 }

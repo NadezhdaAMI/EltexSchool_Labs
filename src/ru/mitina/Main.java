@@ -1,12 +1,19 @@
-package com.company;
+package ru.mitina;
 //Вариант 2
 //        Список объектов продажи элетроники 3-х видов: телефоны, сматфоны и планшеты.
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import ru.mitina.check.CheckAwaiting;
+import ru.mitina.check.CheckProcessed;
+import ru.mitina.check.GenerateOrders;
+import ru.mitina.file.ManagerOrderFile;
+import ru.mitina.items.Smartphone;
+import ru.mitina.items.Tablet;
+import ru.mitina.items.Telephone;
+import ru.mitina.orders.Credentials;
+import ru.mitina.orders.Order;
+import ru.mitina.orders.ShoppingCart;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class Main {
 
@@ -81,5 +88,8 @@ public class Main {
         Thread threadProcessed = new Thread(checkProcessed);
         threadProcessed.setName("Поток №2 поиска обработанных заказов ");
         threadProcessed.start();
+
+        ManagerOrderFile manFile = new ManagerOrderFile();
+        manFile.saveById(ordersProc);
     }
 }

@@ -1,4 +1,6 @@
-package com.company;
+package ru.mitina.check;
+
+import ru.mitina.orders.Order;
 
 import java.util.TreeMap;
 import java.util.UUID;
