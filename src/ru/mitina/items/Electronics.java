@@ -16,6 +16,9 @@ public abstract class Electronics implements ICrudAction {
         this.ID = ID;
     }
 
+    protected Electronics() {       //нужен для десериализации, не удалять!
+    }
+
     public static final int getCountElectronics(){
         return CountElectronics;
     }

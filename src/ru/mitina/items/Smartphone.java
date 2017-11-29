@@ -16,6 +16,9 @@ public class Smartphone extends Electronics implements ICrudAction, Serializable
         super(IDelectronics);
     }
 
+//    public Smartphone() {
+//    }
+
     @Override
     public void create() {
         Random random = new Random();

@@ -49,7 +49,7 @@ public class Main {
     }
     public static ShoppingCart randomShoppingCart(ShoppingCart shopcart){
         UUID ID;
-        int k = 1;
+        int k = 4;
         Random random= new Random();
         int T = random.nextInt(k);
         for (int i = 0; i < T; i++) {
