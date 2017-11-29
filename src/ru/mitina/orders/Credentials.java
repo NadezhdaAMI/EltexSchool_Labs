@@ -6,11 +6,11 @@ import java.util.UUID;
 
 public class Credentials implements Serializable {
 
-    UUID IDClient;
-    String Surname;
-    String Name;
-    String MiddleName;
-    String Email;
+    public UUID IDClient;
+    public String Surname;
+    public String Name;
+    public String MiddleName;
+    public String Email;
 
     public UUID getIDClient() {
         return IDClient;

@@ -14,12 +14,13 @@ public class ManagerOrderJSON extends AManageOrder {        //для хране�
     }
 
     @Override
-    public UUID saveAll(TreeMap<UUID, Order> ordersLoc) {
-        return null;
+    public void saveAll(TreeMap<UUID, Order> ordersLoc) {
+
     }
 
     @Override
-    public Orders readAll(TreeMap<UUID, Order> ordersLoc) {
-        return null;
+    public void readAll() {
+
+
     }
 }

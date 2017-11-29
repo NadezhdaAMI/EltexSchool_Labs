@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 
-class Smartphone extends Electronics implements ICrudAction, Serializable {   //2 type
+public class Smartphone extends Electronics implements ICrudAction, Serializable {   //2 type
     enum SimcardCase {usual, micro_Sim};
     SimcardCase TypeofSimcard;
     int NumberOfSimCard;

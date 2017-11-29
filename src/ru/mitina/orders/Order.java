@@ -72,6 +72,10 @@ public class Order implements Serializable{
         return cart;
     }
 
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
+
     @Override
     public String toString() {
         return " " + getIDOrder() + ", " + cred.toString() + getCart();

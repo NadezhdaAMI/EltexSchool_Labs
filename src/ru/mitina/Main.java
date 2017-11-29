@@ -13,13 +13,16 @@ import ru.mitina.orders.Credentials;
 import ru.mitina.orders.Order;
 import ru.mitina.orders.ShoppingCart;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
+    public static int COUNTPEOPLE = 7;
+
     public static TreeMap<UUID, Order> ordersProc = new TreeMap<>();
 
-    public static GenerateOrders oneOrders = new GenerateOrders(7);
+    public static GenerateOrders oneOrders = new GenerateOrders(COUNTPEOPLE);
 
     public static Credentials randomCredential(Credentials cred){
 
@@ -46,22 +49,23 @@ public class Main {
     }
     public static ShoppingCart randomShoppingCart(ShoppingCart shopcart){
         UUID ID;
+        int k = 1;
         Random random= new Random();
-        int T = random.nextInt(5);
+        int T = random.nextInt(k);
         for (int i = 0; i < T; i++) {
             ID = UUID.randomUUID();
             Telephone telephone = new Telephone(ID);
             telephone.create();
             shopcart.add(telephone);
         }
-        int S = random.nextInt(5);
+        int S = random.nextInt(k);
         for (int i = 0; i < S; i++) {
             ID = UUID.randomUUID();
             Smartphone smartphone = new Smartphone(ID);
             smartphone.create();
             shopcart.add(smartphone);
         }
-        int Tb = random.nextInt(5);
+        int Tb = random.nextInt(k);
         for (int i = 0; i < Tb; i++) {
             ID = UUID.randomUUID();
             Tablet tablet = new Tablet(ID);
@@ -89,7 +93,20 @@ public class Main {
         threadProcessed.setName("Поток №2 поиска обработанных заказов ");
         threadProcessed.start();
 
+        threadAwaiting.join();
+        threadProcessed.join();
+
         ManagerOrderFile manFile = new ManagerOrderFile();
-        manFile.saveById(ordersProc);
+        manFile.saveAll(ordersProc);
+
+        TreeMap<UUID, Order> ordersSave = new TreeMap<>();
+        ManagerOrderFile managerOrderFile = new ManagerOrderFile();
+        try {
+            managerOrderFile.readAll();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

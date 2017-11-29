@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 
-class Telephone extends Electronics implements ICrudAction, Serializable {  //1 type
+public class Telephone extends Electronics implements ICrudAction, Serializable {  //1 type
     enum PhoneCase {classical, clamshell};
     PhoneCase typePhoneCase;
     public String mDevice;

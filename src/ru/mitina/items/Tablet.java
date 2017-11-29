@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 
-class Tablet extends Electronics implements ICrudAction, Serializable { //3 type
+public class Tablet extends Electronics implements ICrudAction, Serializable { //3 type
     public String mDevice;
     enum VideoProc {Nvidia_Tegra, Intel_Atom, RockChip};
     VideoProc TypeofVideoProc;
