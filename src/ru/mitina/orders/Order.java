@@ -78,6 +78,6 @@ public class Order implements Serializable{
 
     @Override
     public String toString() {
-        return " " + getIDOrder() + ", " + cred.toString() + getCart();
+        return " " + /*getIDOrder() + ", " +*/ cred.toString() + getCart();
     }
 }

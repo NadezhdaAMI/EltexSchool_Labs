@@ -41,13 +41,13 @@ public class ShoppingCart<T extends Electronics> implements Serializable{
         return shopCart.size();
     }
 
-//    @Override                             //чтобы посмотреть заказы полностью с содерж корзины
-//    public String toString() {
-//        return " *:" + getShopCart();
-//    }
-
-    @Override
+    @Override                             //чтобы посмотреть заказы полностью с содерж корзины
     public String toString() {
-        return " *: There are electronics!";
+        return " *:" + getShopCart();
     }
+//
+//    @Override
+//    public String toString() {
+//        return " *: There are electronics!";
+//    }
 }

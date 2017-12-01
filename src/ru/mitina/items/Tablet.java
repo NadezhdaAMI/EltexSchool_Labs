@@ -48,7 +48,6 @@ public class Tablet extends Electronics implements ICrudAction, Serializable { /
         int index_NameOperSystem = random.nextInt(NameOperSystemArr.length);
         NameOperSystem = NameOperSystemArr[index_NameOperSystem];
 
-
         CountElectronics++;
     }
 

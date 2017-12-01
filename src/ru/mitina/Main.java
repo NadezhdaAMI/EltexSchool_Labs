@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Main {
 
-    public static int COUNTPEOPLE = 7;
+    public static int COUNTPEOPLE = 7;              //исправить на случайную величину заказов
 
     public static TreeMap<UUID, Order> ordersProc = new TreeMap<>();
 
@@ -49,7 +49,7 @@ public class Main {
     }
     public static ShoppingCart randomShoppingCart(ShoppingCart shopcart){
         UUID ID;
-        int k = 4;
+        int k = 5;
         Random random= new Random();
         int T = random.nextInt(k);
         for (int i = 0; i < T; i++) {
@@ -108,5 +108,19 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        UUID idOldOrder = null;
+        Order orderNew = null;
+        for (Map.Entry<UUID, Order> element: ordersProc.entrySet()){
+            idOldOrder = element.getKey();
+            orderNew = element.getValue();
+            break;
+        }
+//        Order orderOld = managerOrderFile.readById(idOldOrder);
+//        orderOld.setCart(new ShoppingCart());
+        managerOrderFile.readById(idOldOrder);
+        ShoppingCart shopcartNew = new ShoppingCart();
+        orderNew.setCart(randomShoppingCart(shopcartNew));
+        managerOrderFile.saveById(idOldOrder, orderNew);
     }
 }

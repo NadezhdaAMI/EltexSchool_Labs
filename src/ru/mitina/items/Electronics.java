@@ -1,8 +1,9 @@
 package ru.mitina.items;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Electronics implements ICrudAction {
+public abstract class Electronics implements ICrudAction, Serializable {
     public UUID ID;
     String Name;
     int Price;

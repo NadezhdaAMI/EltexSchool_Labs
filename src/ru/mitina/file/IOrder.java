@@ -10,11 +10,11 @@ import java.util.UUID;
 
 public interface IOrder {
 
-    public UUID readById();
+    public void saveById(UUID id, Order ord);
+
+    public Order readById(UUID id);
 
     public void saveAll(TreeMap<UUID, Order> ordersLoc);
-
-//    public readAll();
 
     public void readAll() throws IOException, ClassNotFoundException;
 
