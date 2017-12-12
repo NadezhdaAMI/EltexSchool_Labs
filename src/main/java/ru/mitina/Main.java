@@ -119,11 +119,10 @@ public class Main {
             orderNew = element.getValue();
             break;
         }
-//        Order orderOld = managerOrderFile.readById(idOldOrder);
-//        orderOld.setCart(new ShoppingCart());
+
         managerOrderFile.readById(idOldOrder);
-        ShoppingCart shopcartNew = new ShoppingCart();
-        orderNew.setCart(randomShoppingCart(shopcartNew));
+        ShoppingCart shopcartNew1 = new ShoppingCart();
+        orderNew.setCart(randomShoppingCart(shopcartNew1));
         managerOrderFile.saveById(idOldOrder, orderNew);
 
         ManagerOrderJSON managerOrderJSON = new ManagerOrderJSON();
@@ -135,5 +134,10 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        managerOrderJSON.readById(idOldOrder);
+        ShoppingCart shopcartNew2 = new ShoppingCart();
+        orderNew.setCart(randomShoppingCart(shopcartNew2));
+        managerOrderJSON.saveById(idOldOrder, orderNew);
     }
 }
