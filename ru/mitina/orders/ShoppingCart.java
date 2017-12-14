@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ShoppingCart<T extends Electronics> implements Serializable{
+public class ShoppingCart<T extends Electronics> implements Serializable {
 
     private List<T> shopCart = new LinkedList<>();
 

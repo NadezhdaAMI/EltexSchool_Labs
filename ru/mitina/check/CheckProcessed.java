@@ -20,7 +20,7 @@ public class CheckProcessed extends Acheck {
         testOrdersPros(Main.ordersProc);
     }
 
-    private void testOrdersPros(TreeMap<UUID, Order> ordersLoc) throws NullPointerException{
+    private void testOrdersPros(TreeMap<UUID, Order> ordersLoc) throws NullPointerException {
         System.out.println(Thread.currentThread().getName() + "начал работу: ");
         try {
             for (Map.Entry<UUID, Order> element: ordersLoc.entrySet()){

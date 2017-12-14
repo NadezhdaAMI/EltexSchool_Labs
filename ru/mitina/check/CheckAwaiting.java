@@ -19,11 +19,11 @@ public class CheckAwaiting extends Acheck {
 
     public void run() {
 //        for (int i = 0; i < oneOrders.getCountClients() - 5; i++) {
-            testOrders(ordersProc);
+        testOrders(ordersProc);
 //        }
     }
 
-    private void testOrders(TreeMap<UUID, Order> ordersLoc) throws NullPointerException{
+    private void testOrders(TreeMap<UUID, Order> ordersLoc) throws NullPointerException {
         System.out.println(Thread.currentThread().getName() + "начал работу:");
         try {
             for (Map.Entry<UUID, Order> item : ordersLoc.entrySet()) {

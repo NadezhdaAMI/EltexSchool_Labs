@@ -9,10 +9,17 @@ import java.util.UUID;
 public class Telephone extends Electronics implements ICrudAction, Serializable {  //1 type
     enum PhoneCase {classical, clamshell};
     PhoneCase typePhoneCase;
-    public String mDevice;
+    public transient String mDevice;
 
     public Telephone(UUID ID) {
         super(ID);
+    }
+
+    public Telephone() {
+    }
+
+    public PhoneCase getTypePhoneCase() {
+        return typePhoneCase;
     }
 
     @Override

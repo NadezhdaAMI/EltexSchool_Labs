@@ -1,7 +1,6 @@
 package ru.mitina.orders;
 
 import java.io.Serializable;
-import java.util.Random;
 import java.util.UUID;
 
 public class Credentials implements Serializable {

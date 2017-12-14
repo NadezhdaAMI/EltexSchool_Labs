@@ -1,4 +1,5 @@
 package ru.mitina.file;
+//
 
 import ru.mitina.Main;
 import ru.mitina.orders.Order;
@@ -98,7 +99,7 @@ public class ManagerOrderFile extends AManageOrder {  //для хранения 
     }
 
     @Override
-    public void readAll() throws IOException, ClassNotFoundException{
+    public void readAll() throws IOException, ClassNotFoundException {
         System.out.println("Чтение заказов из файла... ");
         ObjectInputStream objectInputStream = null;
         try {

@@ -3,7 +3,7 @@ package ru.mitina.orders;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class Order implements Serializable{
+public class Order implements Serializable {
 
     private ShoppingCart cart;
 
@@ -11,16 +11,28 @@ public class Order implements Serializable{
 
     private UUID IDOrder;
 
-    private long TimeCreation;
-    private long TimeWaiting;
+    private transient long TimeCreation;
+    private transient long TimeWaiting;
 
-    private final long TimeWaitingONE = 100; // время обработки одного товара в корзине
+    private transient final long TimeWaitingONE = 100; // время обработки одного товара в корзине
 
-    private long dateCreation;
+    private transient long dateCreation;
 
-    public static volatile boolean isAwaiting = false;
-    public static volatile boolean isProcessed = false;
+    public transient static volatile boolean isAwaiting = false;
+    public transient static volatile boolean isProcessed = false;
 //    public boolean setIsAwaiting;
+
+    public Order() {
+    }
+
+    public Credentials getCred() {
+        return cred;
+    }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
 
     public boolean getisAwaiting() {
         return isAwaiting;
@@ -66,10 +78,6 @@ public class Order implements Serializable{
 
     public UUID getIDOrder() {
         return IDOrder;
-    }
-
-    public ShoppingCart getCart() {
-        return cart;
     }
 
     public void setCart(ShoppingCart cart) {

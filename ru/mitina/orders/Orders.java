@@ -1,9 +1,10 @@
 package ru.mitina.orders;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Orders<T> implements Serializable{ // orders это объединение данных клиента и корзины
+public class Orders<T> implements Serializable { // orders это объединение данных клиента и корзины
 
     private List<T> ordersAll = new ArrayList<>(); //
 
@@ -22,7 +23,7 @@ public class Orders<T> implements Serializable{ // orders это объедин�
 
     public void showOrdersAll(){
         for (Object k: ordersAll) {
-        System.out.println(k.toString());
+            System.out.println(k.toString());
         }
     }
 

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 
 public class Tablet extends Electronics implements ICrudAction, Serializable { //3 type
-    public String mDevice;
+    public transient String mDevice;
     enum VideoProc {Nvidia_Tegra, Intel_Atom, RockChip};
     VideoProc TypeofVideoProc;
 
@@ -16,6 +16,14 @@ public class Tablet extends Electronics implements ICrudAction, Serializable { /
 
     public Tablet(UUID IDelectronics) {
         super(IDelectronics);
+    }
+
+    public VideoProc getTypeofVideoProc() {
+        return TypeofVideoProc;
+    }
+
+    public String getTypeofScreenresol() {
+        return TypeofScreenresol;
     }
 
     @Override

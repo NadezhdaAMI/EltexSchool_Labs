@@ -6,6 +6,7 @@ import ru.mitina.check.CheckAwaiting;
 import ru.mitina.check.CheckProcessed;
 import ru.mitina.check.GenerateOrders;
 import ru.mitina.file.ManagerOrderFile;
+import ru.mitina.file.ManagerOrderJSON;
 import ru.mitina.items.Smartphone;
 import ru.mitina.items.Tablet;
 import ru.mitina.items.Telephone;
@@ -14,7 +15,10 @@ import ru.mitina.orders.Order;
 import ru.mitina.orders.ShoppingCart;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
+import java.util.Random;
+import java.util.TreeMap;
+import java.util.UUID;
 
 public class Main {
 
@@ -99,7 +103,6 @@ public class Main {
         ManagerOrderFile manFile = new ManagerOrderFile();
         manFile.saveAll(ordersProc);
 
-        TreeMap<UUID, Order> ordersSave = new TreeMap<>();
         ManagerOrderFile managerOrderFile = new ManagerOrderFile();
         try {
             managerOrderFile.readAll();
@@ -111,16 +114,30 @@ public class Main {
 
         UUID idOldOrder = null;
         Order orderNew = null;
-        for (Map.Entry<UUID, Order> element: ordersProc.entrySet()){
+        for (Map.Entry<UUID, Order> element: ordersProc.entrySet()){ //берем первый заказ и проверим, если ли он в файле
             idOldOrder = element.getKey();
             orderNew = element.getValue();
             break;
         }
-//        Order orderOld = managerOrderFile.readById(idOldOrder);
-//        orderOld.setCart(new ShoppingCart());
+
         managerOrderFile.readById(idOldOrder);
-        ShoppingCart shopcartNew = new ShoppingCart();
-        orderNew.setCart(randomShoppingCart(shopcartNew));
+        ShoppingCart shopcartNew1 = new ShoppingCart();
+        orderNew.setCart(randomShoppingCart(shopcartNew1));
         managerOrderFile.saveById(idOldOrder, orderNew);
+
+        ManagerOrderJSON managerOrderJSON = new ManagerOrderJSON();
+        managerOrderJSON.saveAll(ordersProc);
+        try {
+            managerOrderJSON.readAll();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        managerOrderJSON.readById(idOldOrder);
+        ShoppingCart shopcartNew2 = new ShoppingCart();
+        orderNew.setCart(randomShoppingCart(shopcartNew2));
+        managerOrderJSON.saveById(idOldOrder, orderNew);
     }
 }

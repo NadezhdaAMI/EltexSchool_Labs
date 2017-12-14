@@ -10,13 +10,25 @@ public class Smartphone extends Electronics implements ICrudAction, Serializable
     SimcardCase TypeofSimcard;
     int NumberOfSimCard;
 
-    public String mDevice;
+    public transient String mDevice;
 
     public Smartphone(UUID IDelectronics) {
         super(IDelectronics);
     }
 
-//    public Smartphone() {
+    public Smartphone() {
+    }
+
+    public SimcardCase getTypeofSimcard() {
+        return TypeofSimcard;
+    }
+
+    public int getNumberOfSimCard() {
+        return NumberOfSimCard;
+    }
+
+//    public String getmDevice() {
+//        return mDevice;
 //    }
 
     @Override
