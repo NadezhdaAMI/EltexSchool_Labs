@@ -1,5 +1,4 @@
 package ru.mitina.file;
-//
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
