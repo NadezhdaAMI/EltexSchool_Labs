@@ -20,7 +20,6 @@ public class Order implements Serializable {
 
     public transient static volatile boolean isAwaiting = false;
     public transient static volatile boolean isProcessed = false;
-//    public boolean setIsAwaiting;
 
     public Order() {
     }

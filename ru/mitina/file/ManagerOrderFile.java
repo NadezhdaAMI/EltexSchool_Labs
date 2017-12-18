@@ -1,5 +1,4 @@
 package ru.mitina.file;
-//
 
 import ru.mitina.Main;
 import ru.mitina.orders.Order;

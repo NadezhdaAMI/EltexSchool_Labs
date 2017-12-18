@@ -67,7 +67,6 @@ public class ManagerOrderJSON extends AManageOrder {        //для хране�
         file.renameTo(fileOut);
 
         System.out.println("Изменение заказа с данным ID в файле .json выполнен успешно.");
-
     }
 
     @Override

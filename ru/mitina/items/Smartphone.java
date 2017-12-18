@@ -27,10 +27,6 @@ public class Smartphone extends Electronics implements ICrudAction, Serializable
         return NumberOfSimCard;
     }
 
-//    public String getmDevice() {
-//        return mDevice;
-//    }
-
     @Override
     public void create() {
         Random random = new Random();

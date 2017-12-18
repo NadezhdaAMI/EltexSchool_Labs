@@ -26,10 +26,7 @@ public class CheckProcessed extends Acheck {
             for (Map.Entry<UUID, Order> element: ordersLoc.entrySet()){
                 if ((element.getValue().getisAwaiting()) && !(element.getValue().getisProcessed())){
                     System.out.println("Заказ удален! ID удаленного заказа: " + element.getValue().getIDOrder());
-//                    ordersLoc.remove(element.getKey());
-//                    element.getValue().setIsProcessed(true);
                 } else {
-//                    System.out.println("Время ожидания заказа еще не истекло: " + element.getValue().getIDOrder());
                     try {
                         Thread.currentThread().sleep(500);
                     } catch (InterruptedException e) {

@@ -18,9 +18,7 @@ public class CheckAwaiting extends Acheck {
     }
 
     public void run() {
-//        for (int i = 0; i < oneOrders.getCountClients() - 5; i++) {
         testOrders(ordersProc);
-//        }
     }
 
     private void testOrders(TreeMap<UUID, Order> ordersLoc) throws NullPointerException {
@@ -31,11 +29,9 @@ public class CheckAwaiting extends Acheck {
                     long timeObject = item.getValue().getTimeCreation();
                     long t = System.currentTimeMillis();
                     if ((t - timeObject) > item.getValue().getTimeWaiting()) {
-//                        item.getValue().setIsAwaiting(false);
                         System.out.println("Заказ обработан! так как с момента создания заказа прошло "
                                 + (t - timeObject) / 1000 + "sec," + " заказ: " + item.getValue().getIDOrder());
                     } else {
-//                        System.out.println("Заказ еще в процессе обработки: " + item.getValue().getIDOrder());
                         try {
                             Thread.currentThread().sleep(500);
                         } catch (InterruptedException e) {
